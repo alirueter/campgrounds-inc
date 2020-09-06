@@ -3,6 +3,8 @@ const { Model, DataTypes } = require('sequelize');
 // make sure connection path is correct
 const sequelize = require('../config/connection');
 
+class Post extends Model {}
+
 Post.init(
     {
         id: {
