@@ -25,7 +25,7 @@ async function signupFormHandler(event) {
             alert(response.statusText);
         }
     }
-}
+};
 
 // login form
 async function loginFormHandler(event) {
@@ -51,7 +51,7 @@ async function loginFormHandler(event) {
             alert(response.statusText);
           }
     }
-}
+};
 
 
 document.querySelector('.signup-form').addEventListener('submit', signupFormHandler);
