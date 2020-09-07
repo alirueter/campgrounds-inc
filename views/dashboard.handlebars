@@ -1,0 +1,45 @@
+<section>
+    <h2>Create new Blog Post!</h2>
+    <p>We'd love to hear any campgrounds you've visited that you'd love our users to visit or places that might require a better understanding before going!</p>
+    <form class="new-post-form">
+        <div>
+            <label for="post-title">Title Of Your Post:</label>
+            <input type="text" id="post-title" name="post-title" />
+        </div>
+        <div>
+            <label for="blog_body">Write Your Post Here:</label>
+            <input id="blog_body" class="create-post-textarea" name="blog_body" maxlength="800"
+                value="{{post.blog_body}}" />
+        </div>
+        <button type="submit" class="btn">Post!</button>
+    </form>
+</section>
+
+{{#if posts.length}}
+<section>
+  <h2>Your Posts</h2>
+  <ul>
+    {{#each posts as |post|}}
+    <li>
+      {{> post-details post}}
+      <a href="/dashboard/edit/{{post.id}}" class="edit-url">Edit Post</a>
+    </li>
+    {{/each}}
+  </ul>
+</section>
+{{/if}}
+
+{{#if campgrounds.length}}
+<section>
+    <h2>Your Saved Campgrounds</h2>
+    <ul class="campground-ul-wrapper">
+        {{#each campgrounds as |campground|}}
+
+        {{> campground-details campground}}
+
+        {{/each}}
+    </ul>
+</section>
+{{/if}}
+
+<script src="/javascript/add-post.js"></script>
