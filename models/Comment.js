@@ -1,6 +1,6 @@
 const { Model, DataTypes } = require('sequelize');
 
-// make sure connection path is correct
+// Make sure connection path is correct!
 const sequelize = require('../config/connection');
 
 class Comment extends Model {}
