@@ -22,9 +22,9 @@ const sess = {
 };
 app.use(session(sess));
 
-const helpers = require('./utils/helpers');
+//const helpers = require('./utils/helpers');
 //re-add hbs if you want to add a 'helpers' utility file
-//const hbs = exphbs.create({ helpers });
+const hbs = exphbs.create({});
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
