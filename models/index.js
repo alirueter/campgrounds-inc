@@ -10,7 +10,7 @@ Post.belongsTo(User, {
     foreignKey: 'user_id'
 });
 
-Comment.belogsTo(User, {
+Comment.belongsTo(User, {
     foreignKey: 'user_id'
 });
 
