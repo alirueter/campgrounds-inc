@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { Post, User, Comment } = require('../../models');
+const sequelize = require('../../config/connection');
 const withAuth = require('../../utils/auth');
 
 // route to all reviews
@@ -57,6 +58,20 @@ router.get('/:id', (req, res) => {
             {
                 model: User,
                 attributes: ['username']
+            }, 
+            {
+                model: Comment,
+                attributes: [
+                    'id',
+                    'comment_text',
+                    'post_id',
+                    'user_id',
+                    'created_at'
+                ],
+                include: {
+                    model: User,
+                    attributes: ['username']
+                }
             }
         ]
     })
@@ -92,7 +107,7 @@ router.put('/:id', (req, res) => {
     Post.update(
         {
             title: req.body.title,
-            // entry 
+            post_url: req.body.post_url
         },
         {
             where: {

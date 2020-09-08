@@ -2,7 +2,6 @@ const router = require('express').Router();
 const { Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
-
 // retrieve all comments made
 router.get('/', (req, res) => {
     Comment.findAll()
@@ -25,7 +24,7 @@ router.post('/', (req, res) => {
         .catch(err => {
             console.log(err);
             res.status(400).json(err);
-        })
+        });
     }
 });
 
