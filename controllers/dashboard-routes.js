@@ -4,7 +4,7 @@ const { User, Post, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
 // see personal reviews created
-router.get('/', withAuth, (req, res) => {
+router.get('/', (req, res) => {
     Post.findAll({
         where: {
             user_id: req.session.user_id
@@ -78,7 +78,7 @@ router.get('/edit/:id', (req, res) => {
     })
         .then(data => {
             const post = data.get({ plain: true });
-            res.render('edit', { post,loggedIn: true });
+            res.render('edit-post', { post,loggedIn: true });
         })
         .catch(err => {
             console.log(err);

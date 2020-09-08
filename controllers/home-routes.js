@@ -50,6 +50,7 @@ router.get('/post/:id', (req, res) => {
         attributes: [
             'id',
             'title',
+            'post_url',
             'created_at',
         ],
         include: [
@@ -80,7 +81,7 @@ router.get('/post/:id', (req, res) => {
         }
         const post = data.get({ plain: true });
 
-        res.render('entry-post', { post, loggedIn: req.session.loggedIn });
+        res.render('individual-post', { post, loggedIn: req.session.loggedIn });
     })
     .catch(err => {
         console.log(err);
