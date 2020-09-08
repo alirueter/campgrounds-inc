@@ -8,6 +8,7 @@ router.get('/', (req, res) => {
         attributes: [
             'id',
             'title',
+            'post_url',
             'created_at'
         ],
         include: [
@@ -49,6 +50,7 @@ router.get('/:id', (req, res) => {
         attributes: [
             'id',
             'title',
+            'post_url',
             'created_at'
         ],
         include: [
@@ -72,9 +74,10 @@ router.get('/:id', (req, res) => {
 });
 
 // create reviews
-router.post('/', withAuth, (req, res) => {
+router.post('/', (req, res) => {
     Post.create({
         title: req.body.title,
+        post_url: req.body.post_url,
         user_id: req.session.user_id
     })
     .then(data => res.json(data))
