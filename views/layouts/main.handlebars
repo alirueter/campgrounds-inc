@@ -5,18 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Campgrounds</title>
-    <link rel="stylesheet" type="text/css" href="css/kickstart.css" media="all" />
-    <link rel="stylesheet" type="text/css" href="css/style.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="/css/kickstart.css" media="all" />
     <link rel="stylesheet" href="/stylesheet/correcting-style.css" />
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script type="text/javascript" src="/public/javascript/kickstart.js"></script>
+    <script type="text/javascript" src="/javascript/kickstart.js"></script>
 
 </head>
 
 <body>
-    <div class="main-div-wrapper">
-        <header class="col_12">
+        <header class="grid flex col_12">
             <h1 class="col_6">
                 <a href="/"><span>Campgrounds</span></a>
             </h1>
@@ -35,13 +33,12 @@
             </nav>
         </header>
 
-        <main class="grid flex">
+        <main class="grid flex col_12">
             {{{ body }}}
         </main>
-        <footer>
-            Campgrounds 2020
+        <footer class="grid flex col_12">
+            <h4>Campgrounds 2020</h4>
         </footer>
-    </div>
 
 </body>
 {{#if loggedIn}}
