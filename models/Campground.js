@@ -1,9 +1,11 @@
 const { Model, DataTypes } = require('sequelize');
+
+// Make sure connection path is correct!
 const sequelize = require('../config/connection');
 
-class Post extends Model {}
+class Campground extends Model {}
 
-Post.init(
+Campground.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -11,11 +13,14 @@ Post.init(
             primaryKey: true,
             autoIncrement: true
         },
-        title: {
+        campground_name: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            validate: {
+                len: [1]
+            }
         },
-        post_body: {
+        location: {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
@@ -34,8 +39,8 @@ Post.init(
         sequelize,
         freezeTableName: true,
         underscored: true,
-        modelName: 'post'
+        modelName: 'campground'
     }
 );
 
-module.exports = Post;
+module.exports = Campground;

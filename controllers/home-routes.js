@@ -1,16 +1,39 @@
 const router = require('express').Router();
-const sequelize = require('../config/connection');
-const { Post, User, Comment } = require('../models');
+const { User, Post, Comment } = require('../models');
 
-//needs to get all of the posts
+// View all posts on campgrounds
 router.get('/', (req, res) => {
-  Post.findAll()
-    .then(dbPostData => {
-      const posts = dbPostData.map(post => post.get({ plain: true }));
-      res.render('homepage', {
-        posts,
-        loggedIn: req.session.loggedIn
-      });
+  Post.findAll({
+    attributes: [
+      'id',
+      'title',
+      'post_body',
+      'created_at'
+    ],
+    include: [
+      {
+        model: User,
+        attributes: ['username']
+      },
+      {
+        model: Comment,
+        attributes: [
+          'id',
+          'comment_text',
+          'post_id',
+          'user_id',
+          'created_at'
+        ],
+        include: {
+          model: User,
+          attributes: ['username']
+        }
+      }
+    ]
+  })
+    .then(data => {
+      const posts = data.map(post => post.get({ plain: true }));
+      res.render('homepage', { posts, loggedIn: req.session.loggedIn });
     })
     .catch(err => {
       console.log(err);
@@ -18,31 +41,93 @@ router.get('/', (req, res) => {
     });
 });
 
-//logging in page
+router.get('/post/:id', (req, res) => {
+  Post.findOne({
+    where: {
+      id: req.params.id
+    },
+    attributes: [
+      'id',
+      'title',
+      'post_body',
+      'created_at',
+    ],
+    include: [
+      {
+        model: User,
+        attributes: ['username']
+      },
+      {
+        model: Comment,
+        attributes: [
+          'id',
+          'comment_text',
+          'post_id',
+          'user_id',
+          'created_at'
+        ],
+        include: {
+          model: User,
+          attributes: ['username']
+        }
+      }
+    ]
+  })
+    .then(data => {
+      if (!data) {
+        res.status(404).json({ message: 'No post under this id number!' });
+        return;
+      }
+      const post = data.get({ plain: true });
+
+      res.render('individual-post', { post, loggedIn: req.session.loggedIn });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
+
+// login page
 router.get('/login', (req, res) => {
   if (req.session.loggedIn) {
     res.redirect('/');
     return;
   }
-
   res.render('login');
 });
 
-//signup page
+// signup page 
 router.get('/signup', (req, res) => {
-    if (req.session.loggedIn) {
-        res.redirect('/dashboard');
-        return;
-    }
-    res.render('signup');
+  res.render('signup');
 });
 
-//get's post
+//this is getting one post to display with comments and interact with
 router.get('/post/:id', (req, res) => {
   Post.findOne({
     where: {
       id: req.params.id
-    }
+    },
+    attributes: [
+      'id',
+      'post_body',
+      'title',
+      'created_at'
+    ],
+    include: [
+      {
+        model: Comment,
+        attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
+        include: {
+          model: User,
+          attributes: ['username']
+        }
+      },
+      {
+        model: User,
+        attributes: ['username']
+      }
+    ]
   })
     .then(dbPostData => {
       if (!dbPostData) {
@@ -51,7 +136,7 @@ router.get('/post/:id', (req, res) => {
       }
       const post = dbPostData.get({ plain: true });
 
-      res.render('single-post', {
+      res.render('individual-post', {
         post,
         loggedIn: req.session.loggedIn
       });
