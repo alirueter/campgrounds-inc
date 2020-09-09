@@ -17,10 +17,11 @@ async function loginFormHandler(event) {
 
         // check responses
         if (response.ok) {
-            document.location.replace('/dashboard/');
-          } else {
+            console.log('success');
+            document.location.replace('/dashboard')
+        } else {
             alert(response.statusText);
-          }
+        }
     }
 };
 

@@ -54,22 +54,17 @@
             <option value="wv">WV</option>
             <option value="wy">WY</option>
         </select>
-        <button class="btns">Sumbit</button>
+        <button class="medium green">Sumbit</button>
     </div>
 
 </form>
 
-<<<<<<< HEAD
-<div clas="post-search-container">
-    <ul id="search-results-wrapper" class="search-result-list"></ul>
-=======
 <div class="post-search-container">
-    <ul id="search-results-wrapper" class="search-result-list">
+    <ul id="search-results-wrapper alt" class="search-result-list col_6">
 
     </ul>
->>>>>>> b4bf1b57460c24f35741b194dc6cc4b30f1bdc6a
     
-    <ul class="post-list">
+    <ul class="post-list col_6 alt">
         {{#each posts as |post|}}
         <li>
             {{> post-details post }}

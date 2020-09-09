@@ -4,7 +4,7 @@ const { User, Post, Comment, Campground } = require('../models');
 const withAuth = require('../utils/auth');
 
 // see personal reviews created
-router.get('/', (req, res) => {
+router.get('/', withAuth, (req, res) => {
     Post.findAll({
         where: {
             user_id: req.session.user_id
@@ -46,7 +46,7 @@ router.get('/', (req, res) => {
     });
 });
 
-router.get('/edit/:id', (req, res) => {
+router.get('/edit/:id', withAuth, (req, res) => {
     Post.findOne({
         where: {
             id: req.params.id
@@ -80,7 +80,7 @@ router.get('/edit/:id', (req, res) => {
     })
         .then(data => {
             const post = data.get({ plain: true });
-            res.render('edit-post', { post,loggedIn: true });
+            res.render('edit-post', { post, loggedIn: true });
         })
         .catch(err => {
             console.log(err);
