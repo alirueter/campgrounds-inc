@@ -1,0 +1,73 @@
+* {
+ margin-top: 0;
+}
+
+:root {
+    --primary: black;
+    --secondary: white;
+    --tertiary: darkgreen;
+}
+
+/* header */
+
+header {
+
+}
+
+header h1 {
+
+}
+
+nav {
+
+}
+
+nav ul {
+
+}
+
+/* body */
+
+
+/* post */
+/* holds the all post details */
+.post-wrapper {
+
+}
+.post-title {
+
+}
+
+
+/* comments */
+/* holds all of the comments on a post */
+.comment-container {
+
+}
+/* the step below the container */
+.comment-wrapper {
+
+}
+
+/*displays user info with time and date*/
+.post-userinfo {
+
+}
+
+/* this is the user comment */
+.comment-body {
+
+}
+
+
+/*dashboard*/
+.campground-ul-wrapper {
+
+}
+
+
+
+/*login*/
+
+
+/*singup */
