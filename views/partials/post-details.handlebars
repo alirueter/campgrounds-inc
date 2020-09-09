@@ -1,7 +1,9 @@
 <article class="post-wrapper">
     <div class="post-title">
         <a href="/post/{{id}}"><h3>{{title}}</h3></a>
-        <p>{{post_body}}</p>
+        <blockquote class="small">
+            <p>{{post_body}}</p>
+        </blockquote>
     </div>
     <div class="post-userinfo">
         {{user.username}} on {{format_date created_at}}

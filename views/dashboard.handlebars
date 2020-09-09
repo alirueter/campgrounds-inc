@@ -11,14 +11,14 @@
             <input id="post-body" class="create-post-textarea" name="post-body" maxlength="800"
                 value="{{post.post_body}}" />
         </div>
-        <button type="submit" class="btn">Post!</button>
+        <button type="submit" class="medium green">Post!</button>
     </form>
 </section>
 
 {{#if posts.length}}
 <section>
   <h2>Your Posts</h2>
-  <ul>
+  <ul class="post-list col_6 alt">
     {{#each posts as |post|}}
     <li>
       {{> post-details post}}
@@ -32,7 +32,7 @@
 {{#if campgrounds.length}}
 <section>
     <h2>Your Saved Campgrounds</h2>
-    <ul class="campground-ul-wrapper">
+    <ul class="campground-ul-wrapper col_6 alt">
         {{#each campgrounds as |campground|}}
 
         {{> campground-details campground}}

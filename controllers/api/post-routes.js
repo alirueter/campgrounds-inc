@@ -89,7 +89,7 @@ router.get('/:id', (req, res) => {
 });
 
 // create reviews
-router.post('/', (req, res) => {
+router.post('/', withAuth, (req, res) => {
     Post.create({
         title: req.body.title,
         post_body: req.body.post_body,
@@ -103,7 +103,7 @@ router.post('/', (req, res) => {
 });
 
 // edit personal review
-router.put('/:id', (req, res) => {
+router.put('/:id', withAuth, (req, res) => {
     Post.update(
         {
             title: req.body.title,
@@ -129,7 +129,7 @@ router.put('/:id', (req, res) => {
 });
 
 // delete review 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', withAuth, (req, res) => {
     Post.destroy({
         where: {
             id: req.params.id
