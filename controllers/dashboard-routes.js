@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
-const { User, Post, Comment } = require('../models');
+const { User, Post, Comment, Campground } = require('../models');
 const withAuth = require('../utils/auth');
 
 // see personal reviews created
@@ -32,6 +32,14 @@ router.get('/', (req, res) => {
                     model: User,
                     attributes: ['username']
                 }
+            },
+            {
+                model: Campground,
+                attributes: [
+                    'campground_name',
+                    'location',
+                    'user_id'
+                ]
             }
         ]
     })
