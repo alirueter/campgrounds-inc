@@ -12,6 +12,7 @@ router.get('/', (req, res) => {
         attributes: [
             'id',
             'title',
+            'post_body',
             'created_at'
         ],
         include: [
@@ -32,14 +33,6 @@ router.get('/', (req, res) => {
                     model: User,
                     attributes: ['username']
                 }
-            },
-            {
-                model: Campground,
-                attributes: [
-                    'campground_name',
-                    'location',
-                    'user_id'
-                ]
             }
         ]
     })
@@ -61,6 +54,7 @@ router.get('/edit/:id', (req, res) => {
         attributes: [
             'id', 
             'title',
+            'post_body',
             'created_at',
         ],
         include: [
