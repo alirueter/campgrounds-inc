@@ -9,9 +9,8 @@
             <input name="post-title" type="text" value="{{post.title}}" />
         </div>
         <div>
-            <label for="blog_body">Blog Text:</label>
-            <input id="blog_body" class="blog-text-area" name="blog_body" maxlength="800"
-                value="{{post.blog_body}}" />
+            <label for="post-body">Post Text:</label>
+            <input id="post-body" class="post-text-area" name="post-body" maxlength="800" value="{{post.post_body}}" />
         </div>
         <div>
             <a href="/post/{{post.id}}">{{post.comments.length}} {{format_plural "comment" post.comments.length}}</a>

@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Post, Comment } = require('../../models');
+const { User, Post, Comment, Campground } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 
@@ -42,6 +42,14 @@ router.get('/:id', (req, res) => {
                     model: Post,
                     attributes: ['title']
                 }
+            },
+            {
+                model: Campground,
+                attributes: [
+                    'campground_name',
+                    'location',
+                    'user_id'
+                ]
             }
         ]
     })

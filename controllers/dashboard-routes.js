@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
-const { User, Post, Comment } = require('../models');
+const { User, Post, Comment, Campground } = require('../models');
 const withAuth = require('../utils/auth');
 
 // see personal reviews created
@@ -12,6 +12,7 @@ router.get('/', (req, res) => {
         attributes: [
             'id',
             'title',
+            'post_body',
             'created_at'
         ],
         include: [
@@ -53,6 +54,7 @@ router.get('/edit/:id', (req, res) => {
         attributes: [
             'id', 
             'title',
+            'post_body',
             'created_at',
         ],
         include: [
