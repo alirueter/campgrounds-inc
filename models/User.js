@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+//const { Model } = require("sequelize");
+
+>>>>>>> 1ae4a437a38998b542b1c90aa2e813bce312cc0d
 const { Model, DataTypes } = require('sequelize');
 const bcrypt = require('bcrypt');
 
