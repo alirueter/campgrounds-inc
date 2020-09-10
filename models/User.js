@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 //const { Model } = require("sequelize");
 
+=======
+>>>>>>> feature/alexsis
 const { Model, DataTypes } = require('sequelize');
 const bcrypt = require('bcrypt');
 

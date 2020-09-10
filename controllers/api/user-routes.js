@@ -28,6 +28,7 @@ router.get('/:id', (req, res) => {
                 attributes: [
                     'id',
                     'title',
+                    'post_body',
                     'created_at'
                 ]
             },
@@ -89,7 +90,7 @@ router.post('/', (req, res) => {
 });
 
 // update user info
-router.put('/:id', (req, res) => {
+router.put('/:id', withAuth, (req, res) => {
     User.update(req.body, {
         individualHooks: true,
         where: {
@@ -110,7 +111,7 @@ router.put('/:id', (req, res) => {
 });
 
 // delete user
-router.delete('/:id', (req, res) => {
+router.delete('/:id', withAuth, (req, res) => {
     User.destroy({
         where: {
             id: req.params.id
@@ -159,7 +160,7 @@ router.post('/login', (req, res) => {
 });
 
 // logout route
-router.post('/logout', (req, res) => {
+router.post('/logout', withAuth, (req, res) => {
     if (req.session.loggedIn) {
         req.session.destroy(() => {
             res.status(204).end();
