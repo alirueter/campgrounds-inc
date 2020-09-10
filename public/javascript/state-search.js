@@ -32,6 +32,7 @@ function generateSearch(campgrounds) {
         const number = campgroundsArray[i].contacts.phoneNumbers[0];
         const picture = campgroundsArray[i].images[0];
         const id = campgroundsArray[i].id;
+        const nameId = '#name-'+id;
 
         //create li element
         let campgroundListEl = document.createElement('li');
@@ -39,9 +40,11 @@ function generateSearch(campgrounds) {
         $(campgroundListEl).addClass('col_12 alt');
 
         // append camp name
-        var campName = document.createElement("h5");
-        campName.innerHTML = name;
-        campgroundListEl.appendChild(campName);
+        var campNameEl = document.createElement("h5");
+        campNameEl.setAttribute('id', 'name-'+id)
+        campNameEl.setAttribute('value', name)
+        campNameEl.innerHTML = name;
+        campgroundListEl.appendChild(campNameEl);
 
         console.log(campgroundsArray[i].images[0]);
 
@@ -61,14 +64,19 @@ function generateSearch(campgrounds) {
         if (address == null || address.line1 == "") {
             var noAddressEl = document.createElement("p");
             noAddressEl.innerHTML = "No address available";
+            noAddressEl.setAttribute('id', 'address-'+id)
             campgroundListEl.appendChild(noAddressEl);
+            var addressId = '#address-'+id;
+            noAddressEl.setAttribute('value', 'No address found')
         } else {
             var validAddressEl = document.createElement("p");
-
             validAddressEl.innerHTML = '<p>• ' + address.line1 +
             '</p><p>• ' + address.city + ', ' + address.stateCode + ', '
             + address.postalCode + '</p>';
+            validAddressEl.setAttribute('id', 'address-'+id)
             campgroundListEl.appendChild(validAddressEl);
+            validAddressEl.setAttribute('value', address.line1 + ' ' + address.city)
+            var addressId = '#address-'+id;
         }
 
         // append number
@@ -99,7 +107,7 @@ function generateSearch(campgrounds) {
         var saveButtonEl = document.createElement('button');
         saveButtonEl.innerHTML = "Save";
         saveButtonEl.addEventListener('click', function () {
-            saveCampground(id);
+            saveCampground(nameId, addressId);
         })
         $(saveButtonEl).addClass('med col_12 green');
         campgroundListEl.appendChild(saveButtonEl);
@@ -108,11 +116,14 @@ function generateSearch(campgrounds) {
     }
 };
 
-async function saveCampground(event) {
+async function saveCampground(nameId, addressId) {
     event.preventDefault();
+    console.log(nameId, addressId)
 
-    const campground_name = document.querySelector('#campground-name').value.trim();
-    const location = document.querySelector('#campground-location').value.trim();
+    const campground_name = document.querySelector(nameId).value.trim();
+    const location = document.querySelector(addressId).value.trim();
+    console.log(campground_name);
+    console.log(location)
 
     if (campground_name && location) {
         const response = await fetch('/api/campgrounds', {
@@ -126,7 +137,7 @@ async function saveCampground(event) {
         
         // check response status
         if (response.ok) {
-            //what to put here
+            console.log(response.ok)
         }
         else {
             alert(response.statusText);
