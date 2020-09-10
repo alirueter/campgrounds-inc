@@ -46,6 +46,10 @@ router.get('/', withAuth, (req, res) => {
     });
 });
 
+<<<<<<< HEAD
+=======
+// get single post to edit
+>>>>>>> 8c694634cbbf920790de5b91eb8ee6db345cd0e6
 router.get('/edit/:id', withAuth, (req, res) => {
     Post.findOne({
         where: {
