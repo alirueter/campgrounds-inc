@@ -71,7 +71,6 @@ main {
 .state-search {
   font-size: 20px;
   display: block;
-  margin: 30px 0;
 }
 
 
@@ -112,7 +111,9 @@ textarea {
 }
 
 /* sign up */
-
+.signup-container {
+  text-align: center;
+}
 .signup-form {
   font-size: 18px;
 }
