@@ -12,7 +12,7 @@ const exphbs = require('express-handlebars');
 require('dotenv').config();
 
 const sess = {
-    secret: process.env.DB_SECRET,
+    secret: 'keyboard cat',
     cookie: {maxAge: 900000}, // 15 minutes
     //sameSite: secure,
     resave: false,
