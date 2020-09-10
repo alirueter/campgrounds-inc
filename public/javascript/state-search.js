@@ -37,7 +37,7 @@ var campgroundStateSearch = function(state) {
                     address[i].city, ",",
                     address[i].stateCode, ",",
                     address[i].postalCode);*/
-
+                
             }
         });
 }
@@ -46,3 +46,31 @@ var campgroundStateSearch = function(state) {
 // can see the call in action in console log if replace state with a string of stateCode
 // example campgroundStateSearch('WI');
 campgroundStateSearch(state);
+
+async function saveCampground(event) {
+    event.preventDefault();
+
+    const campground_name = document.querySelector('#campground-name').value.trim();
+    const location = document.querySelector('#campground-location').value.trim();
+
+    if (campground_name && location) {
+        const response = await fetch('/api/campgrounds', {
+            method: 'post',
+            body: JSON.stringify({
+                campground_name,
+                location
+            }),
+            headers: {'Content-Type': 'application/json'}
+        });
+        
+        // check response status
+        if (response.ok) {
+            //what to put here
+        }
+        else {
+            alert(response.statusText);
+        }
+    }
+};
+
+document.querySelector('.campground-list-item').addEventListener('submit', saveCampground);
