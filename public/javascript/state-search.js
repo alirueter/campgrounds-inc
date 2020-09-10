@@ -18,21 +18,30 @@ var campgroundStateSearch = function(event) {
 };
 
 function generateSearch(campgrounds) {
+    $('#search-results').empty() //clearing out the previous search
 
     const campgroundsArray = campgrounds;
+    console.log(campgroundsArray);
 
     for (var i = 0; i < campgroundsArray.length; i++) {
 
-        const searchResultsList = document.querySelector('#search-results');
+        const searchResultsList = document.querySelector('#search-results-wrapper');
+        const name = campgroundsArray[i].name;
         const address = campgroundsArray[i].addresses[0];
         const email = campgroundsArray[i].contacts.emailAddresses[0];
         const number = campgroundsArray[i].contacts.phoneNumbers[0];
         const picture = campgroundsArray[i].images[0];
+        const id = campgroundsArray[i].id;
+
+        //create li element
+        let campgroundListEl = document.createElement('li');
+        campgroundListEl.setAttribute('id', id);
+        $(campgroundListEl).addClass('col_12 alt');
 
         // append camp name
-        var campName = document.createElement("li");
-        campName.innerHTML = '<h6>' + campgroundsArray[i].name + '</h6>';
-        searchResultsList.appendChild(campName);
+        var campName = document.createElement("h5");
+        campName.innerHTML = name;
+        campgroundListEl.appendChild(campName);
 
         console.log(campgroundsArray[i].images[0]);
 
@@ -40,51 +49,62 @@ function generateSearch(campgrounds) {
         if (picture == null || picture.url == "") {
             console.log('No picture!');
         } else {
-           var campImage = document.createElement("p");
-           campImage.innerHTML = '<img src="' + picture.url +'" credit="'
+           var campImageEl = document.createElement("p");
+           campImageEl.innerHTML = '<img src="' + picture.url +'" credit="'
             + picture.credit + '" alt="'
             + picture.altText + '">';
             
-            searchResultsList.appendChild(campImage)
+            campgroundListEl.appendChild(campImageEl)
         }
 
         // append address
         if (address == null || address.line1 == "") {
-            var noAddress = document.createElement("li");
-            noAddress.innerHTML = "No address available";
-            searchResultsList.appendChild(noAddress);
+            var noAddressEl = document.createElement("p");
+            noAddressEl.innerHTML = "No address available";
+            campgroundListEl.appendChild(noAddressEl);
         } else {
-            var validAddress = document.createElement("li");
+            var validAddressEl = document.createElement("p");
 
-            validAddress.innerHTML = '<p>• ' + address.line1 +
+            validAddressEl.innerHTML = '<p>• ' + address.line1 +
             '</p><p>• ' + address.city + ', ' + address.stateCode + ', '
             + address.postalCode + '</p>';
-            searchResultsList.appendChild(validAddress);
+            campgroundListEl.appendChild(validAddressEl);
         }
 
         // append number
         if (number == null || number.phoneNumber == "") {
-            var noNumber = document.createElement("li");
-            noNumber.innerHTML = "<b>Number: N/A</b>";
-            searchResultsList.appendChild(noNumber);
+            var noNumberEl = document.createElement("p");
+            noNumberEl.innerHTML = "<b>Number: N/A</b>";
+            campgroundListEl.appendChild(noNumberEl);
         } else {
-            var validNumber = document.createElement("li");
+            var validNumberEl = document.createElement("p");
 
-            validNumber.innerHTML = '<b>Number:</b> ' + number.phoneNumber;
-            searchResultsList.appendChild(validNumber);
+            validNumberEl.innerHTML = '<b>Number:</b> ' + number.phoneNumber;
+            campgroundListEl.appendChild(validNumberEl);
         }
 
         // append email
         if (email == null || email.emailAddress == "") {
-            var noEmail = document.createElement("li");
-            noEmail.innerHTML = "<b>Email: N/A</b>";
-            searchResultsList.appendChild(noEmail);
+            var noEmailEl = document.createElement("p");
+            noEmailEl.innerHTML = "<b>Email: N/A</b>";
+            campgroundListEl.appendChild(noEmailEl);
         } else {
-            var validEmail = document.createElement("li");
+            var validEmailEl = document.createElement("p");
 
-            validEmail.innerHTML = '<b>Email:</b> ' + email.emailAddress + '</br></br>';
-            searchResultsList.appendChild(validEmail);
+            validEmailEl.innerHTML = '<b>Email:</b> ' + email.emailAddress + '</br></br>';
+            campgroundListEl.appendChild(validEmailEl);
         }
+
+        //append button 
+        var saveButtonEl = document.createElement('button');
+        saveButtonEl.innerHTML = "Save";
+        saveButtonEl.addEventListener('click', function () {
+            saveCampground(id);
+        })
+        $(saveButtonEl).addClass('med col_12 green');
+        campgroundListEl.appendChild(saveButtonEl);
+
+        searchResultsList.appendChild(campgroundListEl)
     }
 };
 
