@@ -1,5 +1,7 @@
 const router = require('express').Router();
+const { Campground } = require('../../models');
 const fetch = require('node-fetch');
+
 const withAuth = require('../../utils/auth');
 
 require('dotenv').config();
