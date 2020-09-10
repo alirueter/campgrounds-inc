@@ -1,5 +1,3 @@
-var state = document.querySelector("#stateDropDown");
-
 var campgroundStateSearch = function(event) {
     event.preventDefault();
 
@@ -43,35 +41,6 @@ var campgroundStateSearch = function(event) {
         });
 }
 
-
-async function saveCampground(event) {
-    event.preventDefault();
-    const campground_name = document.querySelector('#campground-name').value.trim();
-    const location = document.querySelector('#campground-location').value.trim();
-    if (campground_name && location) {
-        const response = await fetch('/api/campgrounds', {
-            method: 'post',
-            body: JSON.stringify({
-                campground_name,
-                location
-            }),
-            headers: {'Content-Type': 'application/json'}
-        });
-        // check response status
-        if (response.ok) {
-            //what to put here
-        }
-        else {
-            alert(response.statusText);
-        }
-    }
-};
-
-
-document.querySelector('.campground-list-item').addEventListener('submit', saveCampground);
-document.querySelector('.state-search').addEventListener('click', campgroundStateSearch);
-
-
 // add this function to a function that gets the response from select dropdown
 // can see the call in action in console log if replace state with a string of stateCode
 // example campgroundStateSearch('WI');
@@ -105,4 +74,4 @@ async function saveCampground(event) {
 
 //document.querySelector('.campground-list-item').addEventListener('submit', saveCampground);
 
-document.querySelector("cg-state-search-form").addEventListener('submit', campgroundStateSearch)
+document.querySelector("#cg-state-search-form").addEventListener('submit', campgroundStateSearch)
