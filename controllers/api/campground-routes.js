@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const fetch = require('node-fetch');
+const withAuth = require('../../utils/auth');
 
 require('dotenv').config();
 
@@ -36,6 +37,20 @@ router.get('/:stateCode', (req, res) => {
         }
         res.json(data.data);
     })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+});
+
+// create reviews
+router.post('/', withAuth, (req, res) => {
+    Campground.create({
+        campground_name: req.body.campground_name,
+        location: req.body.location,
+        user_id: req.session.user_id
+    })
+    .then(data => res.json(data))
     .catch(err => {
         console.log(err);
         res.status(500).json(err);

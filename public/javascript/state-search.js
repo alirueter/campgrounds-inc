@@ -1,6 +1,4 @@
-//var searchBtn = document.querySelector("#state-search-btn");
-
-//var state = document.querySelector("#stateDropDown");
+var state = document.querySelector("#stateDropDown");
 
 var campgroundStateSearch = function(state) {
 
@@ -14,6 +12,7 @@ var campgroundStateSearch = function(state) {
             
             for (var i = 0; i < cg.length; i++) {
 
+                //saveCampground();
                 console.log(cg[i]);
 
                 // these were added to reference back to later 
@@ -41,6 +40,35 @@ var campgroundStateSearch = function(state) {
             }
         });
 }
+
+
+async function saveCampground(event) {
+    event.preventDefault();
+    const campground_name = document.querySelector('#campground-name').value.trim();
+    const location = document.querySelector('#campground-location').value.trim();
+    if (campground_name && location) {
+        const response = await fetch('/api/campgrounds', {
+            method: 'post',
+            body: JSON.stringify({
+                campground_name,
+                location
+            }),
+            headers: {'Content-Type': 'application/json'}
+        });
+        // check response status
+        if (response.ok) {
+            //what to put here
+        }
+        else {
+            alert(response.statusText);
+        }
+    }
+};
+
+
+document.querySelector('.campground-list-item').addEventListener('submit', saveCampground);
+document.querySelector('.state-search').addEventListener('click', campgroundStateSearch);
+
 
 // add this function to a function that gets the response from select dropdown
 // can see the call in action in console log if replace state with a string of stateCode
