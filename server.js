@@ -14,6 +14,7 @@ require('dotenv').config();
 const sess = {
     secret: process.env.DB_SECRET,
     cookie: {maxAge: 900000}, // 15 minutes
+    //sameSite: secure,
     resave: false,
     saveUninitialized: true,
     store: new SequelizeStore({
@@ -24,7 +25,7 @@ app.use(session(sess));
 
 const helpers = require('./utils/helpers');
 //re-add hbs if you want to add a 'helpers' utility file
-//const hbs = exphbs.create({ helpers });
+const hbs = exphbs.create({ helpers });
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
@@ -33,6 +34,6 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(require('./controllers'));
 
-sequelize.sync({force: true}).then(() => {
+sequelize.sync({force: false }).then(() => {
     app.listen(PORT, () => console.log(`Now listening on port ${PORT}`));
 });

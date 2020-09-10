@@ -1,12 +1,15 @@
-# project-two
+# Campgrounds Inc. 
 
 ## Overview
-The user can search for national parks, as well as view campgrounds and activities. They can post and comment on their favorite activities in the user forum. They can also signup for an account.
+Campgrounds Inc is an application that allows users to search for different national park campgrounds by state. When the user signs up for an account and is logged in, they can also save their favorite campgrounds to their dashboard. They can also create blog posts from their dashboard to share more details about their experiences at the campgrounds. This application uses the National Park Service's API: https://www.nps.gov/subjects/developer/api-documentation.htm
 
-## Controllers
-https://www.nps.gov/subjects/developer/api-documentation.htm
-/parks
-/campgrounds
-/activities
+## Deployed Application
+This appilcation is deployed using Heroku: ```LINK TO HEROKU```
 
+## Screenshots
+![homepage](readme-images/homepage.png)
+![search](readme-images/search.png)
+![dashboard](readme-images/dashboard.png)
 
+## Contributors
+This application was created by [Alexsis Conley Brown](https://github.com/AlexsisMCB), [Ali Rueter](https://github.com/alirueter), [Jess Wade](https://github.com/jwade1327), and [Keegan Wedwick.](https://github.com/kwedwick)
