@@ -1,5 +1,9 @@
 const router = require('express').Router();
 const fetch = require('node-fetch');
+<<<<<<< HEAD
+=======
+const { User, Campground } = require('../../models');
+>>>>>>> 49699b3b1e8b728647c2fa2a2ae94e1ea5ebc5db
 const withAuth = require('../../utils/auth');
 
 require('dotenv').config();
@@ -43,7 +47,10 @@ router.get('/:stateCode', (req, res) => {
     });
 });
 
+<<<<<<< HEAD
 // create reviews
+=======
+>>>>>>> 49699b3b1e8b728647c2fa2a2ae94e1ea5ebc5db
 router.post('/', withAuth, (req, res) => {
     Campground.create({
         campground_name: req.body.campground_name,
