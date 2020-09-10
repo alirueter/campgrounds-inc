@@ -1,9 +1,4 @@
-console.log("clear-results.js is loaded");
-
 function clearResults(){
-    console.log("clearResults running....");
-
-    // document.querySelector('.search-results').remove();
     document.getElementById('search-results').innerHTML = "";
 }
 
