@@ -52,12 +52,6 @@ header nav ul li a {
   font-weight: lighter;
   font-size: 1.55vw;
 }
-/* header nav ul li a:hover {
-  background: var(--primary-color);
-  color: var(--secondary-color);
-  border-radius: 15px;
-  text-shadow: none;
-} */
 
 nav ul li {
   font-size: 20px;
@@ -93,14 +87,22 @@ main {
 }
 
 /* state search */
-
 .state-search {
+  margin: 0 10px;
+}
+.state-search-form {
   font-size: 20px;
   display: block;
+}
+.state-search-form h3 {
+  font-size: 40px;
 }
 
 
 /* post */ 
+.post-container {
+  margin: 0 10px;
+}
 .post-list {
   border-top: 1px solid white;
   border-bottom: 1px solid white;
@@ -116,7 +118,10 @@ main {
 
 /* comment */
 .comment-wrapper {
-  padding: 10px 0;
+  padding: 10px;
+}
+.comment-wrapper {
+  border-bottom: .5px solid black;
 }
 .comment-wrapper:nth-child(odd) {
   background-color: rgb(214, 210, 210);
@@ -125,8 +130,13 @@ main {
   background-color: white;
 }
 
+.comment-form {
+  margin: 5px 0;
+}
+
 textarea {
   width: 100%;
+  margin: 10px 0;
 }
 
 /* login */
@@ -134,17 +144,25 @@ textarea {
 .login-wrapper {
   font-size: 15px;
   text-align: center;
-  border: 5px solid black;
+  border-left: 1px solid var(--primary);
+  border-right: 1px solid var(--primary)
 }
 
 /* sign up */
 .signup-container {
   text-align: center;
+  padding: 0;
+  border-left: 1px solid var(--primary);
+  border-right: 1px solid var(--primary)
 }
 .signup-form {
   font-size: 18px;
 }
 
+/* dashboard */
+.create-blog-container {
+  margin-bottom: 20px;
+}
 
 
 /* footer */
@@ -166,9 +184,7 @@ footer h4 {
 /* media queries */
 
 @media screen and (max-width: 980px) {
-  .hero {
-    justify-content: center;
-  }
+
 }
 
 @media screen and (max-width: 768px) {
@@ -202,4 +218,25 @@ h3 {
 .hero {
   height: 400px;
 }
+}
+
+@media screen and (max-width: 560px) {
+  h2 {
+    font-size: 20px;
+  }
+  h3 {
+    font-size: 18px;
+  }
+  h4 {
+    font-size: 15px;
+  }
+  .state-search-form h3 {
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  header h1 {
+    font-size: 25px;
+  }
 }
