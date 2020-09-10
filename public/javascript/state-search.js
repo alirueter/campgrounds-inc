@@ -77,4 +77,4 @@ async function saveCampground(event) {
 
 //document.querySelector('.campground-list-item').addEventListener('submit', saveCampground);
 
-document.querySelector("cg-state-search-form").addEventListener('submit', campgroundStateSearch)
+document.querySelector("#cg-state-search-form").addEventListener('submit', campgroundStateSearch)
