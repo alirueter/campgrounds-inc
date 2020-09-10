@@ -1,0 +1,117 @@
+* {
+  margin: 0;
+}
+
+ul {
+  list-style-type: none;
+  padding-inline-start: 0;
+}
+
+a {
+  text-decoration: none;
+  color: rgb(52, 52, 202);
+}
+
+header {
+  background-color: rgb(240, 233, 233);
+  border-bottom: 1px solid var(--tertiary);
+  justify-items: center;
+  
+}
+header h1 {
+ font-size: 40px;
+}
+
+header a {
+  text-decoration-style: none;
+  color: black;
+}
+
+nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin: 0;
+}
+nav ul li {
+  font-size: 20px;
+}
+
+main {
+  background-color: rgb(110, 145, 110);
+}
+
+/* state search */
+
+.state-search {
+  font-size: 20px;
+  display: block;
+  margin: 30px 0;
+}
+
+
+/* post */ 
+.post-list {
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+}
+.post-title a{
+ color: black;
+}
+.edit-link {
+  display: block;
+  margin: -1.5% 0 2% 0;
+}
+
+
+/* comment */
+.comment-wrapper {
+  padding: 10px 0;
+}
+.comment-wrapper:nth-child(odd) {
+  background-color: rgb(214, 210, 210);
+}
+.comment-wrapper:nth-child(even) {
+  background-color: white;
+}
+
+textarea {
+  width: 100%;
+}
+
+/* login */
+
+.login-wrapper {
+  font-size: 15px;
+  text-align: center;
+}
+
+/* sign up */
+
+.signup-form {
+  font-size: 18px;
+}
+
+
+
+/* footer */
+footer {
+  border-top: 1px solid black;
+  display: block;
+  text-align: left;
+  margin-top: 20px;
+  padding: 10%;
+  font-size: 110%;
+  background-color: rgb(240, 233, 233);
+}
+footer h4 {
+  font-size: 20px;
+  text-align: right;
+}
+
+
+@media screen and (max-width: 768px) {
+  body {
+    text-align: center;
+  }
+}
