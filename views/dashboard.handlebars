@@ -1,4 +1,4 @@
-<section class="grid flex col_12">
+<section class="create-blog-container grid flex col_12">
     <h2>Create new Blog Post!</h2>
     <p>We'd love to hear any campgrounds you've visited that you'd love our users to visit or places that might require a better understanding before going!</p>
     <form class="new-post-form">
@@ -17,7 +17,7 @@
 
 {{#if posts.length}}
 <section class="col_6">
-  <h2>Your Posts</h2>
+  <h2 class="center">Your Posts</h2>
   <ul class="post-list">
     {{#each posts as |post|}}
     <li>
@@ -31,7 +31,7 @@
 
 {{#if campgrounds.length}}
 <section class="col_6">
-    <h2>Your Saved Campgrounds</h2>
+    <h2 class="center">Your Saved Campgrounds</h2>
     <ul class="campground-ul-wrapper col_6 alt">
         {{#each campgrounds as |campground|}}
 

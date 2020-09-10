@@ -14,11 +14,11 @@
 </head>
 
 <body>
-        <header class="grid flex col_12">
-            <h1 class="col_6">
-                <a href="/"><span>Campgrounds</span></a>
+        <header>
+            <h1>
+                <a href="/">Campgrounds</a>
             </h1>
-            <nav class="col_6">
+            <nav>
                 <ul>
                     {{#if loggedIn}}
                     <li><a href="/dashboard"><span>Dashboard</span></a></li>
@@ -26,14 +26,14 @@
 
                     {{else}}
                     <li><a href="/login"><span>Login</span></a></li>
-                    <li><a href="/signup"><span>Sign up</span><a></a></li>
+                    <li><a href="/signup"><span>Sign up</span></a></li>
                     {{/if}}
                 </ul>
 
             </nav>
         </header>
 
-        <main class="grid flex col_12">
+        <main class="grid flex col_10">
             {{{ body }}}
         </main>
         <footer class="grid flex col_12">

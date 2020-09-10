@@ -68,38 +68,38 @@ display:block;
 -----------------------------------*/
 h1,h2,h3,h4,h5,h6{
 font-weight:bold;
-line-height:140%;
+line-height:120%;
 }
 
 h1{
 font-size:3.5em;
-margin:10px 0 10px 0;
+margin:5px 0;
 }
 
 h2{
 font-size:3em;
-margin:10px 0 10px 0;
+margin:5px 0;
 }
 
 h3{
 font-size:2.5em;
-margin:10px 0 10px 0;
+margin:15px 0;
 line-height:130%;
 }
 
 h4{
 font-size:2em;
-margin:10px 0 10px 0;
+margin:15px 0;
 }
 
 h5{
 font-size:1.5em;
-margin:10px 0 10px 0;
+margin:15px 0;
 }
 
 h6{
 font-size:1.2em;
-margin:10px 0 5px 0;
+margin:5px 0;
 }
 
 /*---------------------------------
@@ -129,11 +129,11 @@ border-left:1px solid #ccc;
 -----------------------------------*/
 ul, ol{
 padding:0;
-margin:0 0 20px 25px;
+margin:0;
 }
 
 li{
-padding:5px 0;
+padding: 5px 0;
 margin:0;
 }
 
