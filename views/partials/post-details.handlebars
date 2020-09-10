@@ -5,7 +5,7 @@
             <p>{{post_body}}</p>
         </blockquote>
     </div>
-    <div class="post-userinfo">
+    <div class="post-userinfo grid col 12">
         {{user.username}} on {{format_date created_at}}
         |
         <a href="/post/{{id}}">{{comments.length}} {{format_plural "comment" comments.length}}</a>

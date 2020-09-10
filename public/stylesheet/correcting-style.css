@@ -15,14 +15,16 @@ a {
 header {
   background-color: rgb(240, 233, 233);
   border-bottom: 1px solid var(--tertiary);
-  align-items: center;
+  justify-items: center;
+  
 }
 header h1 {
- font-size: 30px;
+ font-size: 40px;
 }
 
 header a {
   text-decoration-style: none;
+  color: black;
 }
 
 nav ul {
@@ -49,7 +51,13 @@ main {
 
 
 /* post */ 
-
+.post-list {
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+}
+.post-title a{
+ color: black;
+}
 .edit-link {
   display: block;
   margin: -1.5% 0 2% 0;
@@ -57,9 +65,31 @@ main {
 
 
 /* comment */
-
+.comment-wrapper {
+  padding: 10px 0;
+}
 .comment-wrapper:nth-child(odd) {
   background-color: rgb(214, 210, 210);
+}
+.comment-wrapper:nth-child(even) {
+  background-color: white;
+}
+
+textarea {
+  width: 100%;
+}
+
+/* login */
+
+.login-wrapper {
+  font-size: 15px;
+  text-align: center;
+}
+
+/* sign up */
+
+.signup-form {
+  font-size: 18px;
 }
 
 
@@ -77,4 +107,11 @@ footer {
 footer h4 {
   font-size: 20px;
   text-align: right;
+}
+
+
+@media screen and (max-width: 768px) {
+  body {
+    text-align: center;
+  }
 }
