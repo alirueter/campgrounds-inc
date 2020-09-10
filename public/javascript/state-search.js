@@ -71,9 +71,9 @@ function generateSearch(campgrounds) {
     
         } else {
             var validAddressEl = document.createElement("p");
-            validAddressEl.innerHTML = '<p>• ' + address.line1 +
-            '</p><p>• ' + address.city + ', ' + address.stateCode + ', '
-            + address.postalCode + '</p>';
+            validAddressEl.innerHTML = '• ' + address.line1 +
+            ', ' + address.city + ', ' + address.stateCode + ', '
+            + address.postalCode + '.';
             validAddressEl.setAttribute('id', 'address-'+id)
             campgroundListEl.appendChild(validAddressEl);
             validAddressEl.setAttribute('value', address.line1 + ' ' + address.city)
