@@ -2,8 +2,10 @@
 
 //var state = document.querySelector("#stateDropDown");
 
-var campgroundStateSearch = function(state) {
+var campgroundStateSearch = function(event) {
+    event.preventDefault();
 
+    const state = document.querySelector('#stateDropDown').value.trim();
     var url = "https://developer.nps.gov/api/v1/campgrounds?stateCode=" + state + "&api_key=MhULk8Ddiq8LChoxjMFP1euW2OvKmzF3lrN2Cu0c";
 
     fetch(url)
@@ -45,7 +47,7 @@ var campgroundStateSearch = function(state) {
 // add this function to a function that gets the response from select dropdown
 // can see the call in action in console log if replace state with a string of stateCode
 // example campgroundStateSearch('WI');
-campgroundStateSearch(state);
+//campgroundStateSearch(state);
 
 async function saveCampground(event) {
     event.preventDefault();
@@ -73,4 +75,6 @@ async function saveCampground(event) {
     }
 };
 
-document.querySelector('.campground-list-item').addEventListener('submit', saveCampground);
+//document.querySelector('.campground-list-item').addEventListener('submit', saveCampground);
+
+document.querySelector("cg-state-search-form").addEventListener('submit', campgroundStateSearch)
