@@ -1,7 +1,3 @@
-//var searchBtn = document.querySelector("#state-search-btn");
-
-//var state = document.querySelector("#stateDropDown");
-
 var campgroundStateSearch = function(event) {
     event.preventDefault();
 
@@ -16,6 +12,7 @@ var campgroundStateSearch = function(event) {
             
             for (var i = 0; i < cg.length; i++) {
 
+                //saveCampground();
                 console.log(cg[i]);
 
                 // these were added to reference back to later 
