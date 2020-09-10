@@ -1,4 +1,4 @@
-<article>
+<article class="grid flex col_12">
     <a href="/dashboard"> &larr; Back To Dashboard</a>
     <h2>
         Edit Your Post
@@ -15,17 +15,17 @@
         <div>
             <a href="/post/{{post.id}}">{{post.comments.length}} {{format_plural "comment" post.comments.length}}</a>
         </div>
-        <button type="submit" class="save-btn">Save Post</button>
-        <button type="submit" class="delete-post-btn">Delete Post</button>
+        <button type="submit" class="save-btn green">Save Post</button>
+        <button type="submit" class="delete-post-btn red">Delete Post</button>
     </form>
 </article>
-<form class="comment-form">
+<form class="comment-form grid flex col_12">
     <div>
         <textarea name="comment-body" placeholder="Write your comment here"></textarea>
     </div>
 
     <div>
-        <button class="btn" type="submit">Add Comment</button>
+        <button class="btn blue" type="submit">Add Comment</button>
     </div>
 </form>
 {{#if loggedIn}}
