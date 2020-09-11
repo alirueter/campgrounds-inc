@@ -18,7 +18,7 @@ var campgroundStateSearch = function(event) {
 };
 
 function generateSearch(campgrounds) {
-    $('#search-results').empty() //clearing out the previous search
+    $('#search-results-wrapper').empty() //clearing out the previous search
 
     const campgroundsArray = campgrounds;
     console.log(campgroundsArray);
