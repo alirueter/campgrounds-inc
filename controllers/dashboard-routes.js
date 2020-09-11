@@ -37,6 +37,21 @@ router.get('/', withAuth, (req, res) => {
         ]
     })
     .then(data => {
+        Campground.findAll({
+            where: {
+                user_id: req.session.user_id
+            },
+            attributes: [
+                'id',
+                'campground_name',
+                'location',
+                'user_id'
+            ],
+        })
+        .then(campgroundData => {
+            let campgrounds = campgroundData.map(campground => campground.get({ plain: true }));
+
+        })
         const posts = data.map(post => post.get({ plain: true }));
         res.render('dashboard', { posts, loggedIn: true });
     })

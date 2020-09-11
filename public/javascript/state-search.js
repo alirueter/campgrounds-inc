@@ -18,7 +18,7 @@ var campgroundStateSearch = function(event) {
 };
 
 function generateSearch(campgrounds) {
-    $('#search-results').empty() //clearing out the previous search
+    $('#search-results-wrapper').empty() //clearing out the previous search
 
     const campgroundsArray = campgrounds;
     console.log(campgroundsArray);
@@ -65,18 +65,20 @@ function generateSearch(campgrounds) {
             var noAddressEl = document.createElement("p");
             noAddressEl.innerHTML = "No address available";
             noAddressEl.setAttribute('id', 'address-'+id)
+            noAddressEl.setAttribute('value', 'No address found')
             campgroundListEl.appendChild(noAddressEl);
             var addressId = '#address-'+id;
-            noAddressEl.setAttribute('value', 'No address found')
+    
         } else {
             var validAddressEl = document.createElement("p");
-            validAddressEl.innerHTML = '<p>• ' + address.line1 +
-            '</p><p>• ' + address.city + ', ' + address.stateCode + ', '
-            + address.postalCode + '</p>';
+            validAddressEl.innerHTML = '• ' + address.line1 +
+            ', ' + address.city + ', ' + address.stateCode + ', '
+            + address.postalCode + '.';
             validAddressEl.setAttribute('id', 'address-'+id)
             campgroundListEl.appendChild(validAddressEl);
             validAddressEl.setAttribute('value', address.line1 + ' ' + address.city)
             var addressId = '#address-'+id;
+
         }
 
         // append number
@@ -120,8 +122,8 @@ async function saveCampground(nameId, addressId) {
     event.preventDefault();
     console.log(nameId, addressId)
 
-    const campground_name = document.querySelector(nameId).value.trim();
-    const location = document.querySelector(addressId).value.trim();
+    const campground_name = document.querySelector(nameId).innerHTML.toString().trim();
+    const location = document.querySelector(addressId).innerHTML.toString().trim();
     console.log(campground_name);
     console.log(location)
 
@@ -137,7 +139,7 @@ async function saveCampground(nameId, addressId) {
         
         // check response status
         if (response.ok) {
-            console.log(response.ok)
+            alert("Campground Saved!")
         }
         else {
             alert(response.statusText);
