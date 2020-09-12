@@ -30,9 +30,9 @@
 {{/if}}
 
 {{#if userInfo.campgrounds.length}}
-<section class="col_6">
+<section class="col_6 center">
     <h2 class="center">Your Saved Campgrounds</h2>
-    <ul class="campground-ul-wrapper col_6 alt">
+    <ul class="campground-ul-wrapper col_12 alt">
         {{#each userInfo.campgrounds as |campground|}}
 
         {{> campground-details campground}}
