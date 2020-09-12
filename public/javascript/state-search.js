@@ -19,7 +19,8 @@ var campgroundStateSearch = function(event) {
 
 function generateSearch(campgrounds) {
     $('#search-results-wrapper').empty() //clearing out the previous search
-
+    //check if user is logged in 
+    var loggedIn = localStorage.getItem("loggedIn").toLowerCase === true;
     const campgroundsArray = campgrounds;
     console.log(campgroundsArray);
 
@@ -105,16 +106,18 @@ function generateSearch(campgrounds) {
             campgroundListEl.appendChild(validEmailEl);
         }
 
-        //append button 
-        var saveButtonEl = document.createElement('button');
-        saveButtonEl.innerHTML = "Save";
-        saveButtonEl.addEventListener('click', function () {
-            saveCampground(nameId, addressId);
-        })
-        $(saveButtonEl).addClass('med col_12 green');
-        campgroundListEl.appendChild(saveButtonEl);
-
+        if(loggedIn){
+            //append button 
+            var saveButtonEl = document.createElement('button');
+            saveButtonEl.innerHTML = "Save";
+            saveButtonEl.addEventListener('click', function () {
+                saveCampground(nameId, addressId);
+            })
+            $(saveButtonEl).addClass('med col_12 green');
+            campgroundListEl.appendChild(saveButtonEl);
+        } else {
         searchResultsList.appendChild(campgroundListEl)
+        }
     }
 };
 
