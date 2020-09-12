@@ -3,6 +3,28 @@ const sequelize = require('../config/connection');
 const { User, Post, Comment, Campground } = require('../models');
 const withAuth = require('../utils/auth');
 
+router.get('/', withAuth, (req, res) => {
+    Campground.findAll({
+        where: {
+            user_id: req.session.user_id
+        },
+        attributes: [
+            'id',
+            'campground_name',
+            'location',
+            'user_id'
+        ],
+    })
+        .then(campgroundData => {
+            let campgrounds = campgroundData.map(campground => campground.get({ plain: true }));
+            res.render('dashboard', { campgrounds, loggedIn: true });
+        })
+
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+});
 // see personal reviews created
 router.get('/', withAuth, (req, res) => {
     Post.findAll({
@@ -16,7 +38,7 @@ router.get('/', withAuth, (req, res) => {
             'created_at'
         ],
         include: [
-            { 
+            {
                 model: User,
                 attributes: ['username']
             },
@@ -36,30 +58,32 @@ router.get('/', withAuth, (req, res) => {
             }
         ]
     })
-    .then(data => {
-        // Campground.findAll({
-        //     where: {
-        //         user_id: req.session.user_id
-        //     },
-        //     attributes: [
-        //         'id',
-        //         'campground_name',
-        //         'location',
-        //         'user_id'
-        //     ],
-        // })
-        // .then(campgroundData => {
-        //     let campgrounds = campgroundData.map(campground => campground.get({ plain: true }));
+        .then(postData => {
+            // Campground.findAll({
+            //     where: {
+            //         user_id: req.session.user_id
+            //     },
+            //     attributes: [
+            //         'id',
+            //         'campground_name',
+            //         'location',
+            //         'user_id'
+            //     ],
+            // })
+            // .then(campgroundData => {
+            //     let campgrounds = campgroundData.map(campground => campground.get({ plain: true }));
 
-        // })
-        const posts = data.map(post => post.get({ plain: true }));
-        res.render('dashboard', { posts, loggedIn: true });
-    })
-    .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-    });
+            // })
+            const posts = postData.map(post => post.get({ plain: true }));
+            res.render('dashboard', { posts, loggedIn: true });
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
 });
+
+
 
 // get single post to edit
 router.get('/edit/:id', withAuth, (req, res) => {
@@ -68,7 +92,7 @@ router.get('/edit/:id', withAuth, (req, res) => {
             id: req.params.id
         },
         attributes: [
-            'id', 
+            'id',
             'title',
             'post_body',
             'created_at',

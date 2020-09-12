@@ -35,8 +35,8 @@ function generateSearch(campgrounds) {
         const email = campgroundsArray[i].contacts.emailAddresses[0];
         const number = campgroundsArray[i].contacts.phoneNumbers[0];
         const picture = campgroundsArray[i].images[0];
-        const id = campgroundsArray[i].id;
-        const nameId = '#name-'+id;
+        var id = campgroundsArray[i].id;
+        var nameId = '#name-'+id;
 
         //create li element
         let campgroundListEl = document.createElement('li');
@@ -73,7 +73,7 @@ function generateSearch(campgrounds) {
     
         } else {
             var validAddressEl = document.createElement("p");
-            validAddressEl.innerHTML = '• ' + address.line1 +
+            validAddressEl.innerHTML = address.line1 +
             ', ' + address.city + ', ' + address.stateCode + ', '
             + address.postalCode + '.';
             validAddressEl.setAttribute('id', 'address-'+id)
