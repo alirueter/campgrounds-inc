@@ -21,7 +21,11 @@ function generateSearch(campgrounds) {
     $('#search-results-wrapper').empty() //clearing out the previous search
 
     const campgroundsArray = campgrounds;
-    console.log(campgroundsArray);
+
+    // if there are no search results -- alerts user
+    if (campgroundsArray.length == 0) {
+        alert("Sorry! No national park campgrounds available to show right now!");
+    };
 
     for (var i = 0; i < campgroundsArray.length; i++) {
 
@@ -45,8 +49,6 @@ function generateSearch(campgrounds) {
         campNameEl.setAttribute('value', name)
         campNameEl.innerHTML = name;
         campgroundListEl.appendChild(campNameEl);
-
-        console.log(campgroundsArray[i].images[0]);
 
         // append image
         if (picture == null || picture.url == "") {
