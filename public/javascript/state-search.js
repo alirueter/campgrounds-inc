@@ -22,7 +22,11 @@ function generateSearch(campgrounds) {
     //check if user is logged in 
     var loggedIn = localStorage.getItem("loggedIn").toLowerCase === true;
     const campgroundsArray = campgrounds;
-    console.log(campgroundsArray);
+
+    // if there are no search results -- alerts user
+    if (campgroundsArray.length == 0) {
+        alert("Sorry! No national park campgrounds available to show right now!");
+    };
 
     for (var i = 0; i < campgroundsArray.length; i++) {
 
@@ -32,8 +36,8 @@ function generateSearch(campgrounds) {
         const email = campgroundsArray[i].contacts.emailAddresses[0];
         const number = campgroundsArray[i].contacts.phoneNumbers[0];
         const picture = campgroundsArray[i].images[0];
-        const id = campgroundsArray[i].id;
-        const nameId = '#name-'+id;
+        var id = campgroundsArray[i].id;
+        var nameId = '#name-'+id;
 
         //create li element
         let campgroundListEl = document.createElement('li');
@@ -46,8 +50,6 @@ function generateSearch(campgrounds) {
         campNameEl.setAttribute('value', name)
         campNameEl.innerHTML = name;
         campgroundListEl.appendChild(campNameEl);
-
-        console.log(campgroundsArray[i].images[0]);
 
         // append image
         if (picture == null || picture.url == "") {
@@ -72,7 +74,7 @@ function generateSearch(campgrounds) {
     
         } else {
             var validAddressEl = document.createElement("p");
-            validAddressEl.innerHTML = '• ' + address.line1 +
+            validAddressEl.innerHTML = address.line1 +
             ', ' + address.city + ', ' + address.stateCode + ', '
             + address.postalCode + '.';
             validAddressEl.setAttribute('id', 'address-'+id)
