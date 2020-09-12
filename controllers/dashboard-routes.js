@@ -74,8 +74,8 @@ router.get('/', withAuth, (req, res) => {
         ]
     })
     .then(userData => {
-        console.log(userData);
         let userInfo = userData.get({ plain: true });
+        console.log(userInfo)
         res.render('dashboard', { userInfo, loggedIn: true });
     })
 
