@@ -1,6 +1,10 @@
+
 // fetch national park api
 var campgroundStateSearch = function (event) {
     event.preventDefault();
+
+    // load spinner
+    $('.spin-loader').show();
 
     const state = document.querySelector('#stateDropDown').value.trim();
     var url = "https://developer.nps.gov/api/v1/campgrounds?stateCode=" + state + "&api_key=MhULk8Ddiq8LChoxjMFP1euW2OvKmzF3lrN2Cu0c";
@@ -19,6 +23,11 @@ var campgroundStateSearch = function (event) {
 
 function generateSearch(campgrounds) {
     $('#search-results-wrapper').empty() //clearing out the previous search
+
+    // hide spinner
+    $('.spin-loader').hide();
+
+    var loggedIn = localStorage.getItem("loggedIn");
 
     const campgroundsArray = campgrounds;
 
@@ -108,15 +117,17 @@ function generateSearch(campgrounds) {
         }
 
         //append button 
-        var saveButtonEl = document.createElement('button');
-        saveButtonEl.innerHTML = "Save";
-        saveButtonEl.addEventListener('click', function () {
-            saveCampground(nameId, addressId);
-        })
-        $(saveButtonEl).addClass('med col_12 green');
-        campgroundListEl.appendChild(saveButtonEl);
-
-        searchResultsList.appendChild(campgroundListEl)
+        if (loggedIn == "true") {
+            var saveButtonEl = document.createElement('button');
+            saveButtonEl.innerHTML = "Save";
+            saveButtonEl.addEventListener('click', function () {
+                saveCampground(nameId, addressId);
+            })
+            $(saveButtonEl).addClass('med col_12 green');
+            campgroundListEl.appendChild(saveButtonEl);
+        }
+        
+            searchResultsList.appendChild(campgroundListEl)
     }
 };
 

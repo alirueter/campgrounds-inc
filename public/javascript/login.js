@@ -17,10 +17,11 @@ async function loginFormHandler(event) {
 
         // check responses
         if (response.ok) {
-            console.log('success');
+            localStorage.setItem('loggedIn', true);
             document.location.replace('/dashboard')
         } else {
             alert(response.statusText);
+            localStorage.setItem('loggedIn', false);
         }
     }
 };
