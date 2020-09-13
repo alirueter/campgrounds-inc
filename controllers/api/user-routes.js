@@ -15,6 +15,14 @@ router.get('/', (req, res) => {
     });
 });
 
+router.get('/loggedin', (req, res) => {
+    if (!req.session.user_id) {
+        res.json({ loggedin: false })
+      } else {
+        res.json({ loggedin: true })
+      }
+});
+
 // retrieve a user by id #
 router.get('/:id', (req, res) => {
     User.findOne({
