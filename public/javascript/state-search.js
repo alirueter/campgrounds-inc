@@ -27,13 +27,14 @@ function generateSearch(campgrounds) {
     // hide spinner
     $('.spin-loader').hide();
 
-    var loggedIn = localStorage.getItem("loggedIn");
+    // var loggedIn = localStorage.getItem("loggedIn");
 
     const campgroundsArray = campgrounds;
 
     // if there are no search results -- alerts user
     if (campgroundsArray.length == 0) {
         alert("Sorry! No national park campgrounds available to show right now!");
+        return;
     };
 
     for (var i = 0; i < campgroundsArray.length; i++) {
@@ -117,7 +118,6 @@ function generateSearch(campgrounds) {
         }
 
         //append button 
-        if (loggedIn == "true") {
             var saveButtonEl = document.createElement('button');
             saveButtonEl.innerHTML = "Save";
             saveButtonEl.addEventListener('click', function () {
@@ -125,7 +125,6 @@ function generateSearch(campgrounds) {
             })
             $(saveButtonEl).addClass('med col_12 green');
             campgroundListEl.appendChild(saveButtonEl);
-        }
         
             searchResultsList.appendChild(campgroundListEl)
     }
@@ -174,7 +173,5 @@ async function saveCampground(nameId, addressId) {
             }
         })
 };
-
-//document.querySelector('.campground-list-item').addEventListener('submit', saveCampground);
 
 document.querySelector("#cg-state-search-form").addEventListener('submit', campgroundStateSearch);
