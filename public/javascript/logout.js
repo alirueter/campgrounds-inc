@@ -6,6 +6,7 @@ async function logout() {
 
     if (response.ok) {
         document.location.replace('/');
+        localStorage.setItem('loggedIn', false);
     }
     else {
         alert(response.statusText);

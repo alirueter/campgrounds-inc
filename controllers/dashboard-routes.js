@@ -3,63 +3,63 @@ const sequelize = require('../config/connection');
 const { User, Post, Comment, Campground } = require('../models');
 const withAuth = require('../utils/auth');
 
-// see personal reviews created
 router.get('/', withAuth, (req, res) => {
-    Post.findAll({
+    User.findOne({
         where: {
-            user_id: req.session.user_id
+            id: req.session.user_id
         },
-        attributes: [
-            'id',
-            'title',
-            'post_body',
-            'created_at'
-        ],
+        attributes: { exclude: ['password']},
         include: [
-            { 
-                model: User,
-                attributes: ['username']
-            },
             {
-                model: Comment,
+                model: Post,
                 attributes: [
                     'id',
-                    'comment_text',
-                    'post_id',
-                    'user_id',
-                    'created_at'
+                    'title',
+                    'post_body',
+                    'created_at',
                 ],
-                include: {
-                    model: User,
-                    attributes: ['username']
-                }
+                include: [
+                    {
+                        model: User,
+                        attributes: ['username']
+                    },
+                    {
+                        model: Comment,
+                        attributes: [
+                            'id',
+                            'comment_text',
+                            'post_id',
+                            'user_id',
+                            'created_at'
+                        ],
+                        include: {
+                            model: User,
+                            attributes: ['username']
+                        }
+                    }
+                ]
+            },
+            {
+                model: Campground,
+                attributes: [
+                    'id',
+                    'campground_name',
+                    'location',
+                    'user_id'
+                ],
             }
         ]
     })
-    .then(data => {
-        Campground.findAll({
-            where: {
-                user_id: req.session.user_id
-            },
-            attributes: [
-                'id',
-                'campground_name',
-                'location',
-                'user_id'
-            ],
-        })
-        .then(campgroundData => {
-            let campgrounds = campgroundData.map(campground => campground.get({ plain: true }));
-
-        })
-        const posts = data.map(post => post.get({ plain: true }));
-        res.render('dashboard', { posts, loggedIn: true });
+    .then(userData => {
+        let userInfo = userData.get({ plain: true });
+        res.render('dashboard', { userInfo, loggedIn: true });
     })
+
     .catch(err => {
         console.log(err);
         res.status(500).json(err);
     });
-});
+})
 
 // get single post to edit
 router.get('/edit/:id', withAuth, (req, res) => {
@@ -68,7 +68,7 @@ router.get('/edit/:id', withAuth, (req, res) => {
             id: req.params.id
         },
         attributes: [
-            'id', 
+            'id',
             'title',
             'post_body',
             'created_at',

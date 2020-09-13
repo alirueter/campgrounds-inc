@@ -15,11 +15,11 @@
     </form>
 </section>
 
-{{#if posts.length}}
+{{#if userInfo.posts.length}}
 <section class="col_6">
   <h2 class="center">Your Posts</h2>
   <ul class="post-list">
-    {{#each posts as |post|}}
+    {{#each userInfo.posts as |post|}}
     <li>
       {{> post-details post}}
       <a href="/dashboard/edit/{{post.id}}" class="edit-url">Edit Post</a>
@@ -29,11 +29,11 @@
 </section>
 {{/if}}
 
-{{#if campgrounds.length}}
-<section class="col_6">
+{{#if userInfo.campgrounds.length}}
+<section class="col_6 center">
     <h2 class="center">Your Saved Campgrounds</h2>
-    <ul class="campground-ul-wrapper col_6 alt">
-        {{#each campgrounds as |campground|}}
+    <ul class="campground-ul-wrapper col_12 alt">
+        {{#each userInfo.campgrounds as |campground|}}
 
         {{> campground-details campground}}
 

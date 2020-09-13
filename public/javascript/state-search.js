@@ -1,14 +1,18 @@
+
 // fetch national park api
-var campgroundStateSearch = function(event) {
+var campgroundStateSearch = function (event) {
     event.preventDefault();
+
+    // load spinner
+    $('.spin-loader').show();
 
     const state = document.querySelector('#stateDropDown').value.trim();
     var url = "https://developer.nps.gov/api/v1/campgrounds?stateCode=" + state + "&api_key=MhULk8Ddiq8LChoxjMFP1euW2OvKmzF3lrN2Cu0c";
 
     fetch(url)
-        .then(function(response) {
+        .then(function (response) {
             return response.json();
-        }).then(function(data) {
+        }).then(function (data) {
             const cg = data.data;
 
             generateSearch(cg);
@@ -20,8 +24,18 @@ var campgroundStateSearch = function(event) {
 function generateSearch(campgrounds) {
     $('#search-results-wrapper').empty() //clearing out the previous search
 
+    // hide spinner
+    $('.spin-loader').hide();
+
+    // var loggedIn = localStorage.getItem("loggedIn");
+
     const campgroundsArray = campgrounds;
-    console.log(campgroundsArray);
+
+    // if there are no search results -- alerts user
+    if (campgroundsArray.length == 0) {
+        alert("Sorry! No national park campgrounds available to show right now!");
+        return;
+    };
 
     for (var i = 0; i < campgroundsArray.length; i++) {
 
@@ -31,8 +45,8 @@ function generateSearch(campgrounds) {
         const email = campgroundsArray[i].contacts.emailAddresses[0];
         const number = campgroundsArray[i].contacts.phoneNumbers[0];
         const picture = campgroundsArray[i].images[0];
-        const id = campgroundsArray[i].id;
-        const nameId = '#name-'+id;
+        var id = campgroundsArray[i].id;
+        var nameId = '#name-' + id;
 
         //create li element
         let campgroundListEl = document.createElement('li');
@@ -41,22 +55,20 @@ function generateSearch(campgrounds) {
 
         // append camp name
         var campNameEl = document.createElement("h5");
-        campNameEl.setAttribute('id', 'name-'+id)
+        campNameEl.setAttribute('id', 'name-' + id)
         campNameEl.setAttribute('value', name)
         campNameEl.innerHTML = name;
         campgroundListEl.appendChild(campNameEl);
-
-        console.log(campgroundsArray[i].images[0]);
 
         // append image
         if (picture == null || picture.url == "") {
             console.log('No picture!');
         } else {
-           var campImageEl = document.createElement("p");
-           campImageEl.innerHTML = '<img src="' + picture.url +'" credit="'
-            + picture.credit + '" alt="'
-            + picture.altText + '">';
-            
+            var campImageEl = document.createElement("p");
+            campImageEl.innerHTML = '<img src="' + picture.url + '" credit="'
+                + picture.credit + '" alt="'
+                + picture.altText + '">';
+
             campgroundListEl.appendChild(campImageEl)
         }
 
@@ -64,20 +76,20 @@ function generateSearch(campgrounds) {
         if (address == null || address.line1 == "") {
             var noAddressEl = document.createElement("p");
             noAddressEl.innerHTML = "No address available";
-            noAddressEl.setAttribute('id', 'address-'+id)
+            noAddressEl.setAttribute('id', 'address-' + id)
             noAddressEl.setAttribute('value', 'No address found')
             campgroundListEl.appendChild(noAddressEl);
-            var addressId = '#address-'+id;
-    
+            var addressId = '#address-' + id;
+
         } else {
             var validAddressEl = document.createElement("p");
-            validAddressEl.innerHTML = '• ' + address.line1 +
-            ', ' + address.city + ', ' + address.stateCode + ', '
-            + address.postalCode + '.';
-            validAddressEl.setAttribute('id', 'address-'+id)
+            validAddressEl.innerHTML = address.line1 +
+                ', ' + address.city + ', ' + address.stateCode + ', '
+                + address.postalCode + '.';
+            validAddressEl.setAttribute('id', 'address-' + id)
             campgroundListEl.appendChild(validAddressEl);
             validAddressEl.setAttribute('value', address.line1 + ' ' + address.city)
-            var addressId = '#address-'+id;
+            var addressId = '#address-' + id;
 
         }
 
@@ -106,15 +118,15 @@ function generateSearch(campgrounds) {
         }
 
         //append button 
-        var saveButtonEl = document.createElement('button');
-        saveButtonEl.innerHTML = "Save";
-        saveButtonEl.addEventListener('click', function () {
-            saveCampground(nameId, addressId);
-        })
-        $(saveButtonEl).addClass('med col_12 green');
-        campgroundListEl.appendChild(saveButtonEl);
-
-        searchResultsList.appendChild(campgroundListEl)
+            var saveButtonEl = document.createElement('button');
+            saveButtonEl.innerHTML = "Save";
+            saveButtonEl.addEventListener('click', function () {
+                saveCampground(nameId, addressId);
+            })
+            $(saveButtonEl).addClass('med col_12 green');
+            campgroundListEl.appendChild(saveButtonEl);
+        
+            searchResultsList.appendChild(campgroundListEl)
     }
 };
 
@@ -127,26 +139,39 @@ async function saveCampground(nameId, addressId) {
     console.log(campground_name);
     console.log(location)
 
-    if (campground_name && location) {
-        const response = await fetch('/api/campgrounds', {
-            method: 'post',
-            body: JSON.stringify({
-                campground_name,
-                location
-            }),
-            headers: {'Content-Type': 'application/json'}
-        });
-        
-        // check response status
-        if (response.ok) {
-            alert("Campground Saved!")
-        }
-        else {
-            alert(response.statusText);
-        }
-    }
-};
+    const loggedin = await fetch('/api/users/loggedin', {
+        method: 'get',
+        headers: { 'Content-Type': 'application/json' }
+    })
+        .then(response => response.json())
+        .then(loggedin => {
+            console.log(loggedin)
+            if (loggedin.loggedin) {
+                if (campground_name && location) {
+                    fetch('/api/campgrounds', {
+                        method: 'post',
+                        body: JSON.stringify({
+                            campground_name,
+                            location
+                        }),
+                        headers: { 'Content-Type': 'application/json' }
+                    }).then(campgroundResponse => campgroundResponse.json())
+                        .then(storeCampground => {
+                            console.log(storeCampground);
+                            if (storeCampground) {
+                                alert("Campground Saved!")
+                            }
+                            else {
+                                alert("Campground unable to be saved. Try again");
+                            }
+                        })
 
-//document.querySelector('.campground-list-item').addEventListener('submit', saveCampground);
+                    // check response status
+                }
+            } else {
+                alert("You must be logged in to use that.")
+            }
+        })
+};
 
 document.querySelector("#cg-state-search-form").addEventListener('submit', campgroundStateSearch);
