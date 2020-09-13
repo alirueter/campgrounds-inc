@@ -1,3 +1,4 @@
+
 // fetch national park api
 var campgroundStateSearch = function(event) {
     event.preventDefault();
@@ -25,6 +26,8 @@ function generateSearch(campgrounds) {
 
     // hide spinner
     $('.spin-loader').hide();
+
+    var loggedIn = localStorage.getItem("loggedIn");
 
     const campgroundsArray = campgrounds;
 
@@ -114,17 +117,17 @@ function generateSearch(campgrounds) {
         }
 
         //append button 
-
-        var saveButtonEl = document.createElement('button');
-        saveButtonEl.innerHTML = "Save";
-        saveButtonEl.addEventListener('click', function () {
-            saveCampground(nameId, addressId);
-        })
-        $(saveButtonEl).addClass('med col_12 green');
-        campgroundListEl.appendChild(saveButtonEl);
-
-        searchResultsList.appendChild(campgroundListEl)
-
+        if (loggedIn == "true") {
+            var saveButtonEl = document.createElement('button');
+            saveButtonEl.innerHTML = "Save";
+            saveButtonEl.addEventListener('click', function () {
+                saveCampground(nameId, addressId);
+            })
+            $(saveButtonEl).addClass('med col_12 green');
+            campgroundListEl.appendChild(saveButtonEl);
+        }
+        
+            searchResultsList.appendChild(campgroundListEl)
     }
 };
 
