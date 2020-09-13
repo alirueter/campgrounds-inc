@@ -117,9 +117,8 @@ function generateSearch(campgrounds) {
             })
             $(saveButtonEl).addClass('med col_12 green');
             campgroundListEl.appendChild(saveButtonEl);
-        } else {
-        searchResultsList.appendChild(campgroundListEl)
         }
+        searchResultsList.appendChild(campgroundListEl)
     }
 };
 
